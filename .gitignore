@@ -129,7 +129,18 @@ dmypy.json
 .pyre/
 
 # Data
-data/*
+data/raw/*
+data/interim/covid19/*
+data/interim/normal/*
+data/interim/pneumonia/*
+data/processed/train/covid19/*
+data/processed/train/normal/*
+data/processed/train/pneumonia/*
+data/processed/test/covid19/*
+data/processed/test/normal/*
+data/processed/test/pneumonia/*
 
 # IntelliJ
 .idea
+
+!data/**/.gitkeep

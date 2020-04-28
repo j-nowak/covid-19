@@ -10,8 +10,12 @@ import pandas as pd
 import pydicom
 import os.path
 from os import path
+from os import listdir
+from os.path import isfile, join
+import random
 
 RAW_DATA_PATH = './data/raw/'
+INTERIM_DATA_PATH = './data/interim/'
 PROCESSED_DATA_PATH = './data/processed/'
 
 COVID_CLASS = 'covid19'
@@ -68,13 +72,13 @@ def get_metadata_path(dataset_name, metadata_name):
 
 
 def copy_images(class_type, images):
-    target = PROCESSED_DATA_PATH + class_type + '/'
+    target = INTERIM_DATA_PATH + class_type + '/'
     for original_path, original_name in images:
         shutil.copyfile(original_path, target + original_name)
 
 
 def copy_dcm_images(class_type, images):
-    target = PROCESSED_DATA_PATH + class_type + '/'
+    target = INTERIM_DATA_PATH + class_type + '/'
     for original_path, original_name in images:
         ds = pydicom.filereader.dcmread(original_path)
         pixel_array_numpy = ds.pixel_array
@@ -202,3 +206,25 @@ def prepare_figure1_dataset():
 def prepare_rsna_challenge_dataset():
     print('Prepare RSNA_CHALLENGE dataset')
     process_rsna_challenge_images()
+
+
+def split_train_test(fraction=0.15, seed=1):
+    def split_class(class_type):
+        original_path = INTERIM_DATA_PATH + class_type + '/'
+
+        images = listdir(original_path)
+        validation_size = int(len(images) * fraction)
+        random.seed(seed)
+        validation_idxs = set(random.sample(range(len(images)), validation_size))
+
+        train_target_path = PROCESSED_DATA_PATH  + '/train/' + class_type + '/'
+        test_target_path = PROCESSED_DATA_PATH + '/test/' + class_type +'/'
+        for idx, image in enumerate(images):
+            if idx in validation_idxs:
+                shutil.copyfile(original_path + image, test_target_path + image)
+            else:
+                shutil.copyfile(original_path + image, train_target_path + image)
+
+    split_class(COVID_CLASS)
+    split_class(NORMAL_CLASS)
+    split_class(PNEUMONIA_CLASS)

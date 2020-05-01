@@ -128,6 +128,9 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# IntelliJ
+.idea
+
 # Data
 data/raw/*
 data/interim/covid19/*
@@ -140,7 +143,8 @@ data/processed/test/covid19/*
 data/processed/test/normal/*
 data/processed/test/pneumonia/*
 
-# IntelliJ
-.idea
+# Models
+saved_models/*
 
 !data/**/.gitkeep
+!saved_models/**/.gitkeep

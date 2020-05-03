@@ -41,7 +41,7 @@ def data_generators(batch_size=16):
 def build_model(model_type):
   if model_type == 'vgg16_based':
     return vgg16_based_model()
-  elif model_type == 'simlpe_residual':
+  elif model_type == 'simple_residual':
     return resnet_simple_model()
   else:
     raise Exception('Model type not known')
@@ -62,12 +62,16 @@ def fit_model(model, train_generator, validation_generator):
   model.fit_generator(
         train_generator,
         steps_per_epoch=step_size_train,
-        epochs=30,
+        epochs=60,
         validation_data=validation_generator,
         validation_steps=step_size_valid,
         callbacks=[cp_callback])
 
 
 model = build_model(args.model_type)
+model.compile(loss='categorical_crossentropy',
+              optimizer='adam',
+              metrics=['accuracy'])
+
 train_generator, validation_generator = data_generators()
 fit_model(model, train_generator, validation_generator)

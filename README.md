@@ -48,6 +48,17 @@ Run the following script to download and preprocess those datasets:
 python script/setup.py
 ```
 
+### Train models
+Run
+```
+python train/run.py --model_type vgg16_based
+```
+or
+```
+python train/run.py --model_type simple_residual
+```
+depending on a model you want to train.
+
 # References
 
 1. https://arxiv.org/pdf/2003.09871.pdf

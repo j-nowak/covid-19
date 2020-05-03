@@ -22,7 +22,7 @@ __Precision (%)__
 __Precision (%)__
 | COVID-19 | Normal | Pneumonia |
 |----------|--------|-----------|
-| ??       | ??     | ??        |
+| 91       | 85     | 77        |
 
 # Setup
 

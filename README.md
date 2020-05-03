@@ -8,6 +8,7 @@ Coronavirus disease 2019 (COVID-19) is a highly infectious disease caused by [se
 
 ## VGG16 Based Model
 ![VGG16 Based Model confusion matrix](./docs/vgg16_based.png)
+
 *Confusion matrix for VGG16 Based Model on the test dataset.*
 
 __Precision (%)__
@@ -17,6 +18,7 @@ __Precision (%)__
 
 ## Simple Residual Model
 ![Simple Residual Model confusion matrix](./docs/simple_residual.png)
+
 *Confusion matrix for Simple Residual Model on the test dataset.*
 
 __Precision (%)__
